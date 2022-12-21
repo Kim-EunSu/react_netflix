@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getMovies, IGetMovie } from "../api";
 import Banner from "../Components/Banner";
 import { makeImagePath } from "../utils";
+import Slider from "../Components/Slider";
 
 const Wrapper = styled.div`
   background-color: black;
@@ -21,7 +22,6 @@ function Home() {
     getMovies
   );
 
-  // console.log(data, isLoading);
   return (
     <Wrapper>
       {nowLoading ? (
@@ -33,6 +33,7 @@ function Home() {
             title={nowPlaying?.results[0].title}
             OverView={nowPlaying?.results[0].overview}
           />
+          <Slider />
         </>
       )}
     </Wrapper>
