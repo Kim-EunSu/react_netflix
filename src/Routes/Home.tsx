@@ -33,7 +33,12 @@ function Home() {
             title={nowPlaying?.results[0].title}
             OverView={nowPlaying?.results[0].overview}
           />
-          <Slider />
+          <Slider
+            title="현재 상영중인 영화"
+            category="nowPlaying"
+            results={nowPlaying?.results}
+            program="movies"
+          />
         </>
       )}
     </Wrapper>

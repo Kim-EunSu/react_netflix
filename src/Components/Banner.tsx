@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { makeImagePath } from "../utils";
 
 const Wrapper = styled.div<{ bgPhoto: string }>`
   height: 100vh;
