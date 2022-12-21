@@ -4,7 +4,7 @@ const Wrapper = styled.div<{ bgPhoto: string }>`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
     url(${(props) => props.bgPhoto});
   background-size: cover;
@@ -12,6 +12,7 @@ const Wrapper = styled.div<{ bgPhoto: string }>`
 `;
 
 const Title = styled.h2`
+  margin-top: 350px;
   font-size: 40px;
   margin-bottom: 10px;
 `;

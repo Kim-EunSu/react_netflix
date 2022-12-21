@@ -39,18 +39,29 @@ const Button = styled.div`
   border: none;
 `;
 
-interface ISliderProps {
-  title: string;
-  category: string;
-  results: any;
-  program: string;
-}
+const BoxVariants = {
+  normal: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.3,
+    transition: {
+      delay: 0.3,
+    },
+  },
+};
 
 // 한번에 보여주고 싶은 영화 수
 const offset = 6;
 
-// props는 title, category, results, program
-function Slider(props: ISliderProps) {
+interface ISlider {
+  title: string;
+  results: any;
+  category: string;
+  program: string;
+}
+
+function Slider(props: ISlider) {
   const data = props.results;
 
   //겹침현상 해결해주는 함수
@@ -64,12 +75,10 @@ function Slider(props: ISliderProps) {
     if (data) {
       if (leaving) return;
       toggleLeaving();
-      //  영화 총 개수
-      const totalMovies = data.length - 1;
-      //   page가 0에서 시작하기 때문에 maxIndex도 1감소
-      const maxIndex = Math.floor(totalMovies / offset) - 1;
 
-      //  증가시키려고 하는 index가 이미 maxIndex였다면 0, 그렇지않으면 +1
+      const totalMovie = data.length - 1;
+      const maxIndex = Math.floor(totalMovie / offset) - 1;
+
       setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
     }
   };
@@ -102,8 +111,16 @@ function Slider(props: ISliderProps) {
               .slice(1)
               .slice(offset * index, offset * index + offset)
               .map((program: any) => (
-                <Box key={program.id}>
-                  <img src={makeImagePath(program.poster_path, "w500")} />
+                <Box
+                  variants={BoxVariants}
+                  initial="normal"
+                  whileHover="hover"
+                  key={program.id}
+                >
+                  <img
+                    src={makeImagePath(program.poster_path, "w500")}
+                    alt={program.title}
+                  />
                 </Box>
               ))}
           </Row>
