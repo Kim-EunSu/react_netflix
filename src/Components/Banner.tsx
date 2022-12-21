@@ -5,8 +5,9 @@ const Wrapper = styled.div<{ bgPhoto: string }>`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  background-image: url(${(props) => props.bgPhoto});
+  justify-content: end;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
+    url(${(props) => props.bgPhoto});
   background-size: cover;
   padding: 60px;
 `;
