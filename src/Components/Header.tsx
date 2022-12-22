@@ -180,7 +180,7 @@ function Header() {
           <motion.svg
             onClick={toggleSearch}
             animate={{ x: searchOpen ? -185 : 0 }}
-            transition={{ type: "linear" }}
+            transition={{ ease: "linear" }}
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -194,7 +194,7 @@ function Header() {
           <Input
             animate={inputAnimation}
             initial={{ scaleX: 0 }}
-            transition={{ type: "linear" }}
+            transition={{ ease: "linear" }}
             placeholder="Search for movie or tv show..."
           />
         </Search>
