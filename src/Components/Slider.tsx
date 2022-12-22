@@ -1,11 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import useWindowDimensions from "./useWidowDimensions";
 import { makeImagePath } from ".././utils";
+import { useMatch, useNavigate } from "react-router-dom";
+import Popup from "./Popup";
 
 const SWrapper = styled.div`
-  position: relative;
   top: -40px;
   margin-bottom: 300px;
 `;
@@ -155,6 +156,8 @@ interface ISlider {
 function Sliders(props: ISlider) {
   const data = props.results;
 
+  const navigate = useNavigate();
+
   //겹침현상 해결해주는 함수
   const width = useWindowDimensions();
 
@@ -200,6 +203,11 @@ function Sliders(props: ISlider) {
   // onExitComplete(exit끝났을때 실행)를 실행시키는 함수
   const toggleLeaving = () => setLeaving((prev) => !prev);
 
+  // Box클릭했을 때 호출될 함수
+  const onBoxClicked = (movieId: number) => {
+    navigate(`/movies/${movieId}`);
+  };
+
   return (
     <>
       <SWrapper>
@@ -225,6 +233,8 @@ function Sliders(props: ISlider) {
               .slice(offset * index, offset * index + offset)
               .map((program: any) => (
                 <Box
+                  layoutId={program.id}
+                  onClick={() => onBoxClicked(program.id)}
                   variants={BoxVariants}
                   initial="normal"
                   whileHover="hover"
@@ -263,6 +273,10 @@ function Sliders(props: ISlider) {
             </svg>
           </Button>
         </ButtonArea>
+
+        <AnimatePresence>
+          <Popup />
+        </AnimatePresence>
       </SWrapper>
     </>
   );

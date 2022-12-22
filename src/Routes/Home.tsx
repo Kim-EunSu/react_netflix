@@ -64,7 +64,7 @@ function Home() {
               program="movies"
               results={nowPlaying?.results}
             />
-            <Sliders
+            {/* <Sliders
               title="인기 중인 영화"
               category="popular"
               program="movies"
@@ -75,7 +75,7 @@ function Home() {
               category="coming"
               program="movies"
               results={coming?.results}
-            />
+            /> */}
           </SliderWrapper>
         </>
       )}
