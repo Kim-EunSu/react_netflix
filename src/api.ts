@@ -4,6 +4,20 @@ const LANGUAGE = "ko-KO";
 const REGION = "KR";
 const TAIL_PATH = `api_key=${API_KEY}&language${LANGUAGE}=${REGION}`;
 
+//getDtail의 타입
+export interface IDetail {
+  genres: {
+    id: number;
+    name: string;
+  };
+  id: number;
+  poster_path: string;
+  overview: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
 export interface ICome {
   backdrop_path: string;
   id: number;
@@ -82,5 +96,13 @@ export function getPopular() {
 export function getupComing() {
   return fetch(`${BASE_PATH}movie/upcoming?${TAIL_PATH}`).then((response) =>
     response.json()
+  );
+}
+
+//GETDETAIL /movie/{movie_id}
+// https://api.themoviedb.org/3/movie/19995?api_key=c0567696bc620eac81b5e3baab58ee88&language=ko-KO
+export function getDetail(movieId: string) {
+  return fetch(`${BASE_PATH}movie/${movieId}?${TAIL_PATH}`).then(
+    (response) => response.json
   );
 }

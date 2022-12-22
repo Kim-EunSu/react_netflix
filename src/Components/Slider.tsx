@@ -56,7 +56,7 @@ const ButtonArea = styled.div`
   align-items: center;
   justify-content: space-between;
   position: absolute;
-  top: 115px;
+  /* top: 115px; */
   padding: 0px 1%;
 `;
 
@@ -275,7 +275,11 @@ function Sliders(props: ISlider) {
         </ButtonArea>
 
         <AnimatePresence>
-          <Popup />
+          <Popup
+            data={props.results}
+            cate={props.category}
+            links={props.program}
+          />
         </AnimatePresence>
       </SWrapper>
     </>

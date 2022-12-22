@@ -2,6 +2,7 @@ import { Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
 import { motion, useAnimation, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const Nav = styled(motion.nav)`
   display: flex;
@@ -49,7 +50,7 @@ const Item = styled.li`
   }
 `;
 
-const Search = styled.span`
+const Search = styled.form`
   color: white;
   display: flex;
   align-items: center;
@@ -105,6 +106,10 @@ const navVariants = {
   },
 };
 
+interface IForm {
+  keyword: string;
+}
+
 function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const homeMatch = useMatch("/");
@@ -132,6 +137,12 @@ function Header() {
     });
   }, [scrollY, navAnimation]);
 
+  // const { register, handleSubmit } = useForm<IForm>();
+
+  // const onValid = (data: IForm) => {
+  //   console.log(data);
+  // };
+
   return (
     <Nav
       variants={navVariants}
@@ -141,6 +152,7 @@ function Header() {
       <Col>
         <Logo
           variants={logoVariants}
+          initial="normal"
           whileHover="active"
           animate="normal"
           xmlns="http://www.w3.org/2000/svg"
@@ -162,6 +174,8 @@ function Header() {
         </Items>
       </Col>
       <Col>
+        {/* <Search onSubmit={handleSubmit(onValid)}>
+         */}
         <Search>
           <motion.svg
             onClick={toggleSearch}
