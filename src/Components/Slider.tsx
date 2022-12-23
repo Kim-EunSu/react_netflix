@@ -29,12 +29,14 @@ const Row = styled(motion.div)`
 
 const Box = styled(motion.div)`
   background-color: white;
-  color: red;
+  color: ${(props) => props.theme.white.lighter};
   height: 200px;
   text-align: center;
   font-size: 30px;
   cursor: pointer;
   background-size: cover;
+  overflow: hidden;
+  border-radius: 20px;
   &:first-child {
     transform-origin: center left;
   }
@@ -86,6 +88,7 @@ const Info = styled(motion.div)`
   position: absolute;
   width: 100%;
   bottom: 0;
+
   h4 {
     text-align: center;
     font-size: 18px;
@@ -253,7 +256,7 @@ function Sliders(props: ISlider) {
                     alt={program.title}
                   />
                   <Info variants={infoVariants}>
-                    <h4>{program.title}</h4>
+                    <h4>{program.name || program.title}</h4>
                   </Info>
                 </Box>
               ))}

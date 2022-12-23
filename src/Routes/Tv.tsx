@@ -26,14 +26,14 @@ function Tv() {
   const { data: onPopular, isLoading: popularLoading } =
     useQuery<IGetTvResults>(["Tvs, onPopular"], getTvs);
 
-  const { data: onTop, isLoading: totLoading } = useQuery<IgetTopRated>(
+  const { data: onTop, isLoading: topLoading } = useQuery<IgetTopRated>(
     ["Tvs, onTop"],
     getTopRated
   );
 
   return (
     <Wrapper>
-      {popularLoading ? (
+      {popularLoading || topLoading ? (
         <Loader>Loading...</Loader>
       ) : (
         <>
