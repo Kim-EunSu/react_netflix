@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import { getTvs, IGetTvResults } from "../api";
+import { getTvs, IGetTvResults, getTopRated, IgetTopRated } from "../api";
 import Banner from "../Components/Banner";
 import Sliders from "../Components/Slider";
 import { makeImagePath } from "../utils";
@@ -26,6 +26,11 @@ function Tv() {
   const { data: onPopular, isLoading: popularLoading } =
     useQuery<IGetTvResults>(["Tvs, onPopular"], getTvs);
 
+  const { data: onTop, isLoading: totLoading } = useQuery<IgetTopRated>(
+    ["Tvs, onTop"],
+    getTopRated
+  );
+
   return (
     <Wrapper>
       {popularLoading ? (
@@ -39,10 +44,16 @@ function Tv() {
           />
           <SliderWrapper>
             <Sliders
-              title="현재 방송중인 프로그램"
+              title="현재 인기중인 프로그램"
               results={onPopular?.results}
               category="onPopular"
-              program="Tvs"
+              program="tv"
+            />
+            <Sliders
+              title="평점이 높은 프로그램"
+              results={onTop?.results}
+              category="onTop"
+              program="tv"
             />
           </SliderWrapper>
         </>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import useWindowDimensions from "./useWidowDimensions";
 import { makeImagePath } from ".././utils";
-import { useMatch, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Popup from "./Popup";
 
 const SWrapper = styled.div`
@@ -158,6 +158,19 @@ function Sliders(props: ISlider) {
 
   const navigate = useNavigate();
 
+  // 카테고리에 따라
+  const [categoty, setCategory] = useState("");
+
+  // Box클릭했을 때 호출될 함수
+  //  const onBoxClicked = (movieId: number) => {
+  //   navigate(`/movies/${movieId}`);
+  // };
+
+  const onBoxClicked = (programId: number, programCate: string) => {
+    navigate(`/${props.program}/${programId}`);
+    setCategory(programCate);
+  };
+
   //겹침현상 해결해주는 함수
   const width = useWindowDimensions();
 
@@ -203,11 +216,6 @@ function Sliders(props: ISlider) {
   // onExitComplete(exit끝났을때 실행)를 실행시키는 함수
   const toggleLeaving = () => setLeaving((prev) => !prev);
 
-  // Box클릭했을 때 호출될 함수
-  const onBoxClicked = (movieId: number) => {
-    navigate(`/movies/${movieId}`);
-  };
-
   return (
     <>
       <SWrapper>
@@ -225,7 +233,7 @@ function Sliders(props: ISlider) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            transition={{ type: "tween", duration: 1 }}
+            transition={{ ease: "tween", duration: 1 }}
             key={index}
           >
             {props.results
@@ -234,7 +242,7 @@ function Sliders(props: ISlider) {
               .map((program: any) => (
                 <Box
                   layoutId={program.id}
-                  onClick={() => onBoxClicked(program.id)}
+                  onClick={() => onBoxClicked(program.id, props.category)}
                   variants={BoxVariants}
                   initial="normal"
                   whileHover="hover"
@@ -275,11 +283,7 @@ function Sliders(props: ISlider) {
         </ButtonArea>
 
         <AnimatePresence>
-          <Popup
-            data={props.results}
-            cate={props.category}
-            links={props.program}
-          />
+          <Popup data={props.results} cate={categoty} links={props.program} />
         </AnimatePresence>
       </SWrapper>
     </>

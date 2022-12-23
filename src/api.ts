@@ -4,6 +4,26 @@ const LANGUAGE = "ko-KO";
 const REGION = "KR";
 const TAIL_PATH = `api_key=${API_KEY}&language${LANGUAGE}=${REGION}`;
 
+//getTopRated의 result타입
+export interface ITop {
+  backdrop_path: string;
+  first_air_date: number;
+  id: number;
+  name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  vote_average: number;
+}
+
+//getTopRated의 타입
+export interface IgetTopRated {
+  page: number;
+  results: [];
+  total_pages: number;
+  total_results: number;
+}
+
 // getTvs의 타입의 results타입
 export interface ITv {
   backdrop_path: string;
@@ -133,6 +153,14 @@ export function getDetail(movieId: string) {
 // https://api.themoviedb.org/3/tv/on_the_air?api_key=c0567696bc620eac81b5e3baab58ee88&language=ko-KO&page=1
 export function getTvs() {
   return fetch(`${BASE_PATH}tv/popular?${TAIL_PATH}`).then((response) =>
+    response.json()
+  );
+}
+
+//GET /tv/top_rated
+//https://api.themoviedb.org/3/tv/top_rated?api_key=c0567696bc620eac81b5e3baab58ee88&language=Ko&page=1
+export function getTopRated() {
+  return fetch(`${BASE_PATH}tv/top_rated?${TAIL_PATH}`).then((response) =>
     response.json()
   );
 }
