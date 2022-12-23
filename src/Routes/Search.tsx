@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
-import { Navigate, useLocation, useMatch, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { IGetSearch, getSearch } from "../api";
 import { makeImagePath } from "../utils";
 
@@ -64,7 +64,6 @@ const ErrorMsg = styled.h3`
 `;
 
 function Search() {
-  const navigate = useNavigate();
   // 1.keyword접근
   // location을 통해 정보를 얻을 수 있음
   const location = useLocation();
