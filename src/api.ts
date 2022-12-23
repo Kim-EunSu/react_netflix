@@ -4,6 +4,28 @@ const LANGUAGE = "ko-KO";
 const REGION = "KR";
 const TAIL_PATH = `api_key=${API_KEY}&language${LANGUAGE}=${REGION}`;
 
+//getSearch의  result타입
+export interface ISearch {
+  id: number;
+  media_type: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: number;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+//getSearch의 타입
+export interface IGetSearch {
+  page: number;
+  results: ISearch[];
+  total_pages: number;
+  total_results: number;
+}
+
 //getTopRated의 result타입
 export interface ITop {
   backdrop_path: string;
@@ -162,5 +184,13 @@ export function getTvs() {
 export function getTopRated() {
   return fetch(`${BASE_PATH}tv/top_rated?${TAIL_PATH}`).then((response) =>
     response.json()
+  );
+}
+
+//GET /search/multi
+// https://api.themoviedb.org/3/search/multi?api_key=c0567696bc620eac81b5e3baab58ee88&language=ko-KO&query=Avatar&page=1&include_adult=false&region=KR
+export function getSearch(keyword: string | null) {
+  return fetch(`${BASE_PATH}search/multi?${TAIL_PATH}&query=${keyword}`).then(
+    (response) => response.json()
   );
 }

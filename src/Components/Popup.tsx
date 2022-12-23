@@ -85,8 +85,6 @@ function Popup({ data, cate, links }: IPopDetail) {
     // program.id는 number, bigMovieMatch.params.movieId는 string 한쪽에 맞혀주기
     data.find((program: any) => program.id + "" === bigMovieMatch.params.id);
 
-  console.log(clickedMovie);
-
   return bigMovieMatch && clickedMovie ? (
     <>
       <Overlay
