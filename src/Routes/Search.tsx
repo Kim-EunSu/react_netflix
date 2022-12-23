@@ -46,6 +46,7 @@ const Box = styled.div`
   text-align: center;
   cursor: pointer;
   overflow: hidden;
+  background-size: cover;
 `;
 
 const Error = styled.div`
