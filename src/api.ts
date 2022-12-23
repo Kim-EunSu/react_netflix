@@ -4,6 +4,28 @@ const LANGUAGE = "ko-KO";
 const REGION = "KR";
 const TAIL_PATH = `api_key=${API_KEY}&language${LANGUAGE}=${REGION}`;
 
+// getTvs의 타입의 results타입
+export interface ITv {
+  backdrop_path: string;
+  first_air_date: number;
+  id: number;
+  name: string;
+  original_language: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+// getTvs의 타입
+export interface IGetTvResults {
+  page: number;
+  results: ITv[];
+  total_pages: number;
+  total_results: number;
+}
+
 //getDtail의 타입
 export interface IDetail {
   genres: {
@@ -102,7 +124,15 @@ export function getupComing() {
 //GETDETAIL /movie/{movie_id}
 // https://api.themoviedb.org/3/movie/19995?api_key=c0567696bc620eac81b5e3baab58ee88&language=ko-KO
 export function getDetail(movieId: string) {
-  return fetch(`${BASE_PATH}movie/${movieId}?${TAIL_PATH}`).then(
-    (response) => response.json
+  return fetch(`${BASE_PATH}movie/${movieId}?${TAIL_PATH}`).then((response) =>
+    response.json()
+  );
+}
+
+//GET /tv/popular
+// https://api.themoviedb.org/3/tv/on_the_air?api_key=c0567696bc620eac81b5e3baab58ee88&language=ko-KO&page=1
+export function getTvs() {
+  return fetch(`${BASE_PATH}tv/popular?${TAIL_PATH}`).then((response) =>
+    response.json()
   );
 }
