@@ -56,10 +56,6 @@ const BigOverview = styled.p`
   margin-bottom: 50px;
 `;
 
-const BigSimilar = styled.div`
-  font-size: 20px;
-`;
-
 interface IPopDetail {
   data: any;
   cate: string;
@@ -112,7 +108,6 @@ function Popup({ data, cate, links }: IPopDetail) {
               <BigTitle> {clickedMovie.title}</BigTitle>
               <BigRelease> 개봉일: {clickedMovie.release_date}</BigRelease>
               <BigOverview> 줄거리: {clickedMovie.overview}</BigOverview>
-              <BigSimilar>비슷한 컨텐츠</BigSimilar>
             </BigContainer>
           </>
         )}
